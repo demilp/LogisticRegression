@@ -30,7 +30,7 @@ class LogisticRegression:
 			sum = 0
 			predicted =self.predict(X)
 			dif = (predicted-y)
-			feat = X[:][j][np.newaxis]
+			feat = X[:,j][np.newaxis]
 			s = (predicted-y)*feat
 			#for i in range(X.shape[0]):
 			#	sum += (self.predict(X[i]) - y[i][0]) * X[i][j]
