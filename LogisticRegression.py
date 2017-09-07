@@ -9,7 +9,7 @@ class LogisticRegression:
 	def fit(self, X, y):
 		X = np.c_[np.ones((X.shape[0], 1)), X]
 		self.weights = np.ones((1, X.shape[1]))
-		self.MBGD(X, y)
+		self.SGD(X, y)
 
 	def predict(self, x):
 		#s = self.weights.T.dot(x)[0]
@@ -22,11 +22,11 @@ class LogisticRegression:
 
 	def gradients(self, X, y):
 		grads = np.zeros((X.shape[1], 1))
+		p = self.predict(X)-y
 		for j in range(self.weights.shape[1]):
-			#p = self.predict(X)
-			#f = X[:, j][np.newaxis].T
-			#grads[j] = np.mean((p - y) * f)
-			grads[j] = np.mean((self.predict(X)-y)*(X[:, j][np.newaxis]).T)
+			f = X[:, j][np.newaxis].T
+			grads[j] = np.mean(p * f)
+			#grads[j] = np.mean((self.predict(X)-y)*((X[:, j][np.newaxis]).T))
 		return grads
 
 	def BGD(self, X, y):
